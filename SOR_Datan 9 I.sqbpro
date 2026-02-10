@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="SOR_Datan 9 I.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="browser pragmas structure query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1738"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="Courses" custom_title="0" dock_id="3" table="4,7:mainCourses"/><dock_state state="000000ff00000000fd0000000100000002000005bb00000390fc0100000003fb000000160064006f0063006b00420072006f00770073006500310100000000000005bb0000000000000000fb000000160064006f0063006b00420072006f00770073006500320100000000ffffffff0000000000000000fb000000160064006f0063006b00420072006f00770073006500330100000000000005bb0000011e00ffffff000002690000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="Courses" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="35"/><column index="2" value="263"/><column index="3" value="87"/><column index="4" value="75"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Enrollments" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="35"/><column index="2" value="73"/><column index="3" value="67"/><column index="4" value="73"/><column index="5" value="42"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1*">PRAGMA foreign_keys = ON;
+
+DROP TABLE Courses
+
+CREATE TABLE Courses (
+	ID INTEGER PRIMARY KEY,
+	Title TEXT NOT NULL,
+	Hours INTEGER NOT NULL CHECK(Hours &gt; 0),
+	Teacher_ID INTEGER,
+	FOREIGN KEY (Teacher_ID) REFERENCES Teachers(ID)
+)
+
+DROP TABLE Enrollments
+
+CREATE TABLE Enrollments (
+	ID INTEGER PRIMARY KEY,
+	Student_ID INTEGER,
+	Course_ID INTEGER,
+	Enroll_Date TEXT NOT NULL,
+	Grade INTEGER NOT NULL CHECK(Grade BETWEEN 0 AND 100),
+	FOREIGN KEY (Student_ID) REFERENCES Students(ID),
+	FOREIGN KEY (Course_ID) REFERENCES Courses(ID)
+)
+
+SELECT * FROM Students
+
+INSERT INTO Students
+VALUES (1, 'Datan', 'd@lox.ru', '30.02.00', 'Africa');
+INSERT INTO Students
+VALUES (2, 'Babayaka', '@', '2', 'Oklahoma');
+INSERT INTO Students
+VALUES (3, 'Karamislo', 'adjajdwda@yanaonsf.omg', '69.69.69', 'Ohio');
+INSERT INTO Students
+VALUES (4, 'Po', 'lol@lol.lol', '13515123.3125125.1294125', 'Valentay');
+INSERT INTO Students
+VALUES (5, 'Bob', '@@@@@Sobaka@@@.@@', '-2', 'Musorka');
+
+SELECT * FROM Teachers
+
+INSERT INTO Teachers
+VALUES (1, 'Dahmer', 'Hagay@byaka.yes', '120');
+INSERT INTO Teachers
+VALUES (2, 'Minion', 'g', '0.12158691837598171231245');
+INSERT INTO Teachers
+VALUES (3, 'Vladislav', 'krutyak@aikfajgawjfgag..', '13');
+
+SELECT * FROM Courses
+
+INSERT INTO Courses
+VALUES (1, 'Umenie kakat stoya', 2159510239, 1);
+INSERT INTO Courses
+VALUES (2, 'kak polozhit kartoshku na golovu', 537, 2);
+INSERT INTO Courses
+VALUES (3, 'informatyka', 1, 3);
+INSERT INTO Courses
+VALUES (4, 'lalala', 404, 1);
+
+SELECT * FROM Enrollments
+
+INSERT INTO Enrollments
+VALUES (1, 4, 2, '10.02.26', 0);
+INSERT INTO Enrollments
+VALUES (2, 2, 1, '14.13.99', 100);
+INSERT INTO Enrollments
+VALUES (3, 5, 3, '2', 69);
+INSERT INTO Enrollments
+VALUES (4, 3, 1, '13.02.13', 54);
+INSERT INTO Enrollments
+VALUES (5, 2, 4, '0292951', 26);
+INSERT INTO Enrollments
+VALUES (6, 5, 2, '000000000', 42);
+INSERT INTO Enrollments
+VALUES (7, 1, 4, '4029375937175', 1);
+
+CREATE VIEW [TeacherWorkload] AS
+	SELECT Full_Name
+	FROM Teachers
+	</sql><current_tab id="0"/></tab_sql></sqlb_project>
