@@ -1,0 +1,77 @@
+PRAGMA foreign_keys = ON;
+
+DROP TABLE Courses
+
+CREATE TABLE Courses (
+	ID INTEGER PRIMARY KEY,
+	Title TEXT NOT NULL,
+	Hours INTEGER NOT NULL CHECK(Hours > 0),
+	Teacher_ID INTEGER,
+	FOREIGN KEY (Teacher_ID) REFERENCES Teachers(ID)
+)
+
+DROP TABLE Enrollments
+
+CREATE TABLE Enrollments (
+	ID INTEGER PRIMARY KEY,
+	Student_ID INTEGER,
+	Course_ID INTEGER,
+	Enroll_Date TEXT NOT NULL,
+	Grade INTEGER NOT NULL CHECK(Grade BETWEEN 0 AND 100),
+	FOREIGN KEY (Student_ID) REFERENCES Students(ID),
+	FOREIGN KEY (Course_ID) REFERENCES Courses(ID)
+)
+
+SELECT * FROM Students
+
+INSERT INTO Students
+VALUES (1, 'Datan', 'd@lox.ru', '30.02.00', 'Africa');
+INSERT INTO Students
+VALUES (2, 'Babayaka', '@', '2', 'Oklahoma');
+INSERT INTO Students
+VALUES (3, 'Karamislo', 'adjajdwda@yanaonsf.omg', '69.69.69', 'Ohio');
+INSERT INTO Students
+VALUES (4, 'Po', 'lol@lol.lol', '13515123.3125125.1294125', 'Valentay');
+INSERT INTO Students
+VALUES (5, 'Bob', '@@@@@Sobaka@@@.@@', '-2', 'Musorka');
+
+SELECT * FROM Teachers
+
+INSERT INTO Teachers
+VALUES (1, 'Dahmer', 'Hagay@byaka.yes', '120');
+INSERT INTO Teachers
+VALUES (2, 'Minion', 'g', '0.12158691837598171231245');
+INSERT INTO Teachers
+VALUES (3, 'Vladislav', 'krutyak@aikfajgawjfgag..', '13');
+
+SELECT * FROM Courses
+
+INSERT INTO Courses
+VALUES (1, 'Umenie kakat stoya', 2159510239, 1);
+INSERT INTO Courses
+VALUES (2, 'kak polozhit kartoshku na golovu', 537, 2);
+INSERT INTO Courses
+VALUES (3, 'informatyka', 1, 3);
+INSERT INTO Courses
+VALUES (4, 'lalala', 404, 1);
+
+SELECT * FROM Enrollments
+
+INSERT INTO Enrollments
+VALUES (1, 4, 2, '10.02.26', 0);
+INSERT INTO Enrollments
+VALUES (2, 2, 1, '14.13.99', 100);
+INSERT INTO Enrollments
+VALUES (3, 5, 3, '2', 69);
+INSERT INTO Enrollments
+VALUES (4, 3, 1, '13.02.13', 54);
+INSERT INTO Enrollments
+VALUES (5, 2, 4, '0292951', 26);
+INSERT INTO Enrollments
+VALUES (6, 5, 2, '000000000', 42);
+INSERT INTO Enrollments
+VALUES (7, 1, 4, '4029375937175', 1);
+
+CREATE VIEW [TeacherWorkload] AS
+	SELECT Full_Name
+	FROM Teachers
